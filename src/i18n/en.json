@@ -18,10 +18,15 @@
   "mail": "Mail",
 
   
+  "launches": "Latest Launches",
+  "communities": "Our Communities",
   "standaloneVillas": "Standalone Villas",
-  "mividaGardens": "Mivida Gardens",
-  "vistaSprings": "Vista Springs",
   "apartments": "Apartments",
+  "townhouses": "Townhouses",
+  "mividaGardens": "Mivida Gardens",
   "marassiRedSea": "Marassi Red Sea",
-  "marinaViews": "Marina Views" 
+  "soulLuxury": "Soul Luxury",
+  "vistaSprings": "Vista Springs",
+  "marinaViews": "Marina Views",
+  "theCliff": "The Cliff"
 }
