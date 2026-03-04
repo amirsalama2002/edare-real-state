@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MessageCircle, FileText, Phone, Mail } from 'lucide-react';
+import { MessageCircle, Phone, Mail, FileText, Video } from 'lucide-react';
 import en from '../i18n/en.json';
 import ar from '../i18n/ar.json';
 
@@ -28,8 +28,6 @@ const Hero = () => {
 
   const t = lang === 'en' ? en : ar;
   const isRtl = lang === 'ar';
-
-  // رابط الفيديو
   const videoUrl = "/public/296958_medium.mp4";
 
   return (
@@ -48,7 +46,7 @@ const Hero = () => {
         <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60"></div>
       </div>
 
-      {/* المحتوى النصي - مسحوب بالكامل من الملفات */}
+      {/* المحتوى النصي */}
       <div className={`absolute bottom-32 z-10 text-white max-w-5xl px-8 md:px-20 transition-all duration-1000 
         ${isRtl ? 'right-0 text-right' : 'left-0 text-left'}`}>
         
@@ -75,22 +73,38 @@ const Hero = () => {
         </div>
       </div>
 
-      {/* الشريط الجانبي - مسحوب بالكامل من الملفات */}
-      <div className={`fixed top-1/2 -translate-y-1/2 z-50 flex flex-col bg-black/30 backdrop-blur-3xl border border-white/10 overflow-hidden shadow-2xl transition-all duration-700
-        ${isRtl ? 'left-0 rounded-r-2xl' : 'right-0 rounded-l-2xl'}`}>
+      {/* --- الأزرار الجانبية العائمة (تعديل الـ Sidebar ليطابق صورة بن غاطي) --- */}
+      <div className={`fixed top-1/2 -translate-y-1/2 z-50 flex flex-col gap-4
+        ${isRtl ? 'left-6' : 'right-6'}`}>
         
-        <SidebarItem icon={<MessageCircle size={20} />} label={t.whatsapp} hoverClass="hover:bg-green-600/90" />
+        <FloatingButton 
+          icon={<Phone size={22} />} 
+          label={t.callUs} 
+          hoverBg="hover:bg-blue-600" 
+        />
+        
+        <FloatingButton 
+          icon={<MessageCircle size={24} />} 
+          label={t.whatsapp} 
+          hoverBg="hover:bg-green-600" 
+        />
 
-        <div className="relative flex flex-col items-center justify-center w-24 py-8 cursor-pointer border-b border-white/5 bg-white/5 text-white group">
-          <FileText size={20} className="mb-2 group-hover:scale-110 transition-transform" />
-          <span className="text-[8px] uppercase tracking-widest font-black text-center px-1">
-            {t.brochure}
-          </span>
-          <div className={`absolute top-0 h-full w-[4px] bg-white ${isRtl ? 'left-0' : 'right-0'}`}></div>
+        <FloatingButton 
+          icon={<Video size={22} />} 
+          label="Video Call" 
+          hoverBg="hover:bg-purple-600" 
+        />
+
+        {/* زر البروشور بشكل مميز */}
+        <div className="group relative flex flex-col items-center">
+           <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center bg-white/10 backdrop-blur-xl border border-white/20 rounded-full cursor-pointer transition-all duration-500 group-hover:scale-110 group-hover:bg-white group-hover:text-black text-white shadow-2xl">
+              <FileText size={22} />
+           </div>
+           <span className={`absolute whitespace-nowrap px-4 py-2 bg-black/80 text-white text-[10px] uppercase tracking-widest rounded transition-all duration-300 opacity-0 group-hover:opacity-100 
+             ${isRtl ? 'right-20' : 'left-[-140px]'}`}>
+             {t.brochure}
+           </span>
         </div>
-
-        <SidebarItem icon={<Phone size={20} />} label={t.callUs} hoverClass="hover:bg-blue-600/90" />
-        <SidebarItem icon={<Mail size={20} />} label={t.mail} hoverClass="hover:bg-red-900/90" />
       </div>
 
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-30">
@@ -100,12 +114,17 @@ const Hero = () => {
   );
 };
 
-const SidebarItem = ({ icon, label, hoverClass }) => (
-  <div className={`flex flex-col items-center justify-center w-24 py-8 cursor-pointer border-b border-white/5 transition-all duration-500 group ${hoverClass}`}>
-    <div className="text-white/80 group-hover:text-white transition-all">{icon}</div>
-    <span className="text-[8px] uppercase tracking-widest text-gray-400 group-hover:text-white mt-3 text-center px-1 font-bold">
+// مكون الزر العائم الصغير
+const FloatingButton = ({ icon, label, hoverBg }) => (
+  <div className="group relative flex items-center justify-center">
+    {/* التسمية التي تظهر عند الـ Hover */}
+    <span className="absolute right-20 scale-0 group-hover:scale-100 transition-all duration-300 origin-right bg-white text-black text-[10px] font-bold py-1 px-3 rounded uppercase tracking-tighter whitespace-nowrap">
       {label}
     </span>
+    
+    <div className={`w-14 h-14 md:w-16 md:h-16 flex items-center justify-center bg-black/20 backdrop-blur-2xl border border-white/10 rounded-full cursor-pointer text-white/90 transition-all duration-500 shadow-xl ${hoverBg} group-hover:text-white group-hover:scale-110 group-hover:shadow-white/10`}>
+      {icon}
+    </div>
   </div>
 );
 

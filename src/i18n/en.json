@@ -15,5 +15,13 @@
   "exploreBtn": "Explore Properties",
   "contactBtn": "Contact Us",
   "brochure": "Brochure",
-  "mail": "Mail"
+  "mail": "Mail",
+
+  
+  "standaloneVillas": "Standalone Villas",
+  "mividaGardens": "Mivida Gardens",
+  "vistaSprings": "Vista Springs",
+  "apartments": "Apartments",
+  "marassiRedSea": "Marassi Red Sea",
+  "marinaViews": "Marina Views" 
 }
