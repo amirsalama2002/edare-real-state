@@ -1,14 +1,7 @@
+import React from 'react'
 
-
-
-function App() {
+export default function App() {
   return (
-    <div className="h-screen bg-black flex items-center justify-center">
-      <h1 className="text-5xl text-white font-bold">
-        Edare Real Estate 🔥
-      </h1>
-    </div>
-  );
+    <div>App</div>
+  )
 }
-
-export default App;
