@@ -30,7 +30,7 @@ const Hero = () => {
   const isRtl = lang === 'ar';
 
   // رابط الفيديو
-  const videoUrl = "/public/323513_medium.mp4";
+  const videoUrl = "/public/296958_medium.mp4";
 
   return (
     <div className="relative h-screen w-full overflow-hidden bg-black font-sans" dir={isRtl ? 'rtl' : 'ltr'}>
