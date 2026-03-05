@@ -97,6 +97,7 @@ const Navbar = () => {
       {/* --- Mobile Menu --- */}
       <div className={`lg:hidden absolute top-full left-0 w-full bg-black/95 transition-all duration-500 overflow-hidden ${isMobileMenuOpen ? 'max-h-screen border-t border-white/10 py-10' : 'max-h-0'}`}>
         <div className="flex flex-col items-center gap-8 text-white uppercase text-[12px] tracking-[0.2em] font-bold">
+          <a href="/" onClick={() => setIsMobileMenuOpen(false)}>{t.home}</a>
           <a href="#about" onClick={() => setIsMobileMenuOpen(false)}>{t.about}</a>
           <a href="#launches" onClick={() => setIsMobileMenuOpen(false)}>{t.launches}</a>
           <a href="#communities" onClick={() => setIsMobileMenuOpen(false)}>{t.communities}</a>

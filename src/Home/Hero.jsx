@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { MessageCircle, Phone, Mail, FileText, Video } from 'lucide-react';
+import { MessageCircle, Phone, Mail, FileText, Video, ChevronDown } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import en from '../i18n/en.json';
 import ar from '../i18n/ar.json';
 
@@ -8,17 +9,8 @@ const Hero = () => {
   const videoRef = useRef(null);
 
   useEffect(() => {
-    const handleStorageChange = () => {
-      setLang(localStorage.getItem('appLang') || 'en');
-    };
+    const handleStorageChange = () => setLang(localStorage.getItem('appLang') || 'en');
     window.addEventListener('storage', handleStorageChange);
-    
-    if (videoRef.current) {
-      videoRef.current.play().catch(() => {
-        console.log("Autoplay blocked");
-      });
-    }
-
     const interval = setInterval(handleStorageChange, 500);
     return () => {
       window.removeEventListener('storage', handleStorageChange);
@@ -31,9 +23,9 @@ const Hero = () => {
   const videoUrl = "/public/296958_medium.mp4";
 
   return (
-    <div className="relative h-screen w-full overflow-hidden bg-black font-sans" dir={isRtl ? 'rtl' : 'ltr'}>
+    <div className="relative h-[100svh] w-full overflow-hidden bg-black font-sans" dir={isRtl ? 'rtl' : 'ltr'}>
       
-      {/* خلفية الفيديو */}
+      {/* خلفية الفيديو - محسنة للموبايل */}
       <div className="absolute inset-0 z-0">
         <video
           ref={videoRef}
@@ -43,86 +35,117 @@ const Hero = () => {
           <source src={videoUrl} type="video/mp4" />
         </video>
         <div className="absolute inset-0 bg-black/40"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/60"></div>
+        {/* تدرج لوني أقوى في الأسفل لضمان وضوح النصوص على الموبايل */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent"></div>
       </div>
 
-      {/* المحتوى النصي */}
-      <div className={`absolute bottom-32 z-10 text-white max-w-5xl px-8 md:px-20 transition-all duration-1000 
+      {/* المحتوى النصي - Responsive تماماً */}
+      <div className={`absolute bottom-[15%] md:bottom-32 z-10 text-white w-full max-w-7xl px-6 md:px-20 transition-all duration-1000 
         ${isRtl ? 'right-0 text-right' : 'left-0 text-left'}`}>
         
-        <div className="flex items-center gap-4 mb-6">
-          <span className="uppercase tracking-[0.4em] text-[10px] md:text-xs font-bold text-white/80">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="flex items-center gap-3 mb-4 md:mb-6"
+        >
+          <span className="uppercase tracking-[0.3em] text-[9px] md:text-xs font-bold text-white/70">
             {t.heroSubtitle}
           </span>
-          <div className="h-[1px] w-20 bg-white/40"></div>
-        </div>
+          <div className="h-[1px] w-12 md:w-20 bg-white/40"></div>
+        </motion.div>
         
-        <h1 className="text-5xl md:text-8xl lg:text-[100px] font-serif leading-[1] tracking-tighter mb-10">
+        <motion.h1 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="text-[11vw] md:text-8xl lg:text-[100px] font-serif leading-[1.1] tracking-tighter mb-8 md:mb-12"
+        >
           {t.heroTitlePart1} <br /> 
-          <span className="italic font-light">{t.heroTitlePart2}</span>
-        </h1>
+          <span className="italic font-light text-gray-400">{t.heroTitlePart2}</span>
+        </motion.h1>
 
-        <div className="flex gap-6">
-          <button className="bg-white text-black px-12 py-5 uppercase tracking-[0.2em] text-[10px] font-bold transition-all duration-500 hover:bg-gray-200">
+        {/* أزرار الفعل الرئيسية - مصفوفة بشكل أفضل للموبايل */}
+        <motion.div 
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.4 }}
+          className="flex flex-col sm:flex-row gap-4 sm:gap-6"
+        >
+          <button className="w-full sm:w-auto bg-white text-black px-10 py-4 md:py-5 uppercase tracking-[0.2em] text-[9px] font-black transition-all duration-500 active:scale-95 shadow-2xl">
             {t.exploreBtn}
           </button>
           
-          <button className="border border-white/30 backdrop-blur-sm px-12 py-5 uppercase tracking-[0.2em] text-[10px] font-bold text-white transition-all duration-500 hover:bg-white/10">
+          <button className="w-full sm:w-auto border border-white/20 backdrop-blur-md px-10 py-4 md:py-5 uppercase tracking-[0.2em] text-[9px] font-black text-white transition-all duration-500 active:scale-95">
             {t.contactBtn}
           </button>
-        </div>
+        </motion.div>
       </div>
 
-      {/* --- الأزرار الجانبية العائمة (تعديل الـ Sidebar ليطابق صورة بن غاطي) --- */}
-      <div className={`fixed top-1/2 -translate-y-1/2 z-50 flex flex-col gap-4
-        ${isRtl ? 'left-6' : 'right-6'}`}>
+      {/* --- الأزرار الجانبية العائمة: ذكية للموبايل --- */}
+      {/* في الموبايل تظهر في الأسفل كـ Action Bar وفي الديسكتوب كـ Sidebar */}
+      <div className={`fixed bottom-6 md:top-1/2 md:-translate-y-1/2 z-50 flex md:flex-col gap-3 px-6 md:px-0 w-full md:w-auto justify-center
+        ${isRtl ? 'md:left-8' : 'md:right-8'}`}>
         
         <FloatingButton 
-          icon={<Phone size={22} />} 
+          icon={<Phone size={20} />} 
           label={t.callUs} 
+          color="bg-white/10"
           hoverBg="hover:bg-blue-600" 
+          isRtl={isRtl}
         />
         
         <FloatingButton 
-          icon={<MessageCircle size={24} />} 
+          icon={<MessageCircle size={22} />} 
           label={t.whatsapp} 
+          color="bg-white/10"
           hoverBg="hover:bg-green-600" 
+          isRtl={isRtl}
         />
 
         <FloatingButton 
-          icon={<Video size={22} />} 
-          label="Video Call" 
-          hoverBg="hover:bg-purple-600" 
+          icon={<FileText size={20} />} 
+          label={t.brochure} 
+          color="bg-white/10"
+          hoverBg="hover:bg-white hover:text-black" 
+          isRtl={isRtl}
         />
-
-        {/* زر البروشور بشكل مميز */}
-        <div className="group relative flex flex-col items-center">
-           <div className="w-14 h-14 md:w-16 md:h-16 flex items-center justify-center bg-white/10 backdrop-blur-xl border border-white/20 rounded-full cursor-pointer transition-all duration-500 group-hover:scale-110 group-hover:bg-white group-hover:text-black text-white shadow-2xl">
-              <FileText size={22} />
-           </div>
-           <span className={`absolute whitespace-nowrap px-4 py-2 bg-black/80 text-white text-[10px] uppercase tracking-widest rounded transition-all duration-300 opacity-0 group-hover:opacity-100 
-             ${isRtl ? 'right-20' : 'left-[-140px]'}`}>
-             {t.brochure}
-           </span>
+        
+        {/* زر الفيديو يختفي في الموبايل الصغير جداً لتقليل الزحمة */}
+        <div className="hidden sm:flex">
+          <FloatingButton 
+            icon={<Video size={20} />} 
+            label="Video Call" 
+            color="bg-white/10"
+            hoverBg="hover:bg-purple-600" 
+            isRtl={isRtl}
+          />
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 opacity-30">
-        <div className="w-[1px] h-16 bg-gradient-to-b from-white to-transparent"></div>
+      {/* مؤشر النزول للأسفل */}
+      <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
+        <motion.div 
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+        >
+          <ChevronDown size={20} className="text-white" />
+        </motion.div>
+        <div className="w-[1px] h-10 md:h-16 bg-gradient-to-b from-white to-transparent"></div>
       </div>
     </div>
   );
 };
 
-// مكون الزر العائم الصغير
-const FloatingButton = ({ icon, label, hoverBg }) => (
-  <div className="group relative flex items-center justify-center">
-    {/* التسمية التي تظهر عند الـ Hover */}
-    <span className="absolute right-20 scale-0 group-hover:scale-100 transition-all duration-300 origin-right bg-white text-black text-[10px] font-bold py-1 px-3 rounded uppercase tracking-tighter whitespace-nowrap">
+// مكون الزر العائم المطور ليناسب اللمس
+const FloatingButton = ({ icon, label, hoverBg, color, isRtl }) => (
+  <div className="group relative flex items-center justify-center flex-1 md:flex-none">
+    {/* Label للديسكتوب فقط */}
+    <span className={`absolute hidden md:block scale-0 group-hover:scale-100 transition-all duration-300 origin-center md:origin-right bg-white text-black text-[10px] font-bold py-2 px-4 rounded-full uppercase tracking-tighter whitespace-nowrap shadow-xl
+      ${isRtl ? 'md:left-20' : 'md:right-20'}`}>
       {label}
     </span>
     
-    <div className={`w-14 h-14 md:w-16 md:h-16 flex items-center justify-center bg-black/20 backdrop-blur-2xl border border-white/10 rounded-full cursor-pointer text-white/90 transition-all duration-500 shadow-xl ${hoverBg} group-hover:text-white group-hover:scale-110 group-hover:shadow-white/10`}>
+    <div className={`w-full h-14 md:w-16 md:h-16 flex items-center justify-center ${color} backdrop-blur-xl border border-white/10 rounded-2xl md:rounded-full cursor-pointer text-white/90 transition-all duration-500 shadow-2xl ${hoverBg} active:scale-90 group-hover:scale-110`}>
       {icon}
     </div>
   </div>
