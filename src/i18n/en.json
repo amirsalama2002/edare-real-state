@@ -72,5 +72,41 @@
   "ultraDiscoverBtn": "Discover Luxury",
   "ultraStep1": "LUXURY",
   "ultraStep2": "DESIGN",
-  "ultraStep3": "FUTURE"
+  "ultraStep3": "FUTURE",
+
+
+  "aboutSectionTag": "WHO WE ARE",
+  "aboutMainTitle": "Crafting a Legacy of Luxury in Dubai & Beyond",
+  "aboutDescription": "At EDARA, we don't just build walls; we design living communities where luxury meets nature. Our philosophy is rooted in turning your dreams into a tangible reality that lives forever.",
+  "aboutMissionTitle": "Our Mission",
+  "aboutMissionDesc": "To redefine high-end living through architectural innovation and uncompromising hospitality standards.",
+  "aboutVisionTitle": "Our Vision",
+  "aboutVisionDesc": "To be the global benchmark for excellence in sustainable and luxurious real estate experiences.",
+
+
+  "excellence": "EXCELLENCE",
+  "statsLegacyNote": "We don't just build homes; we build a legacy that lasts for generations.",
+  "statYears": "Years of Experience",
+  "statProjects": "Luxury Projects",
+  "statFamilies": "Happy Families",
+  "statCities": "Global Cities",
+  "statsLegacyTitle": "Our Legacy,",
+
+
+  "ajmanTag": "OUR HEARTBEAT",
+  "ajmanTitle": "Ajman: Where Our Story Began",
+  "ajmanDesc": "From the serene coasts of Ajman to the skyline of Dubai, EDARA has been a cornerstone in shaping the emirate's real estate landscape. We don't just know the market; we belong to it.",
+  "ajmanPoint1": "Local Expertise",
+  "ajmanPoint1Desc": "Unmatched knowledge of Ajman's hidden gems and investment hotspots.",
+  "ajmanPoint2": "Strategic Growth",
+  "ajmanPoint2Desc": "Connecting Ajman's heritage with modern luxury living.",
+
+
+  "lifestyleTag": "THE EXPERIENCE",
+  "lifestyleTitle": "Beyond Four Walls",
+  "lifestyleDesc": "We curate environments that redefine luxury, where every detail is a testament to our commitment to excellence.",
+  "service1": "Private Concierge",
+  "service2": "Modern Architecture",
+  "service3": "Exclusive Locations",
+  "service4": "Sustainable Living"
 }
