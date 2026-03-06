@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom'; // استيراد Link من راوتر
-import { Menu, X, Phone, MessageCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Menu, X, Phone, MessageCircle, Send } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 import en from '../i18n/en.json';
 import ar from '../i18n/ar.json';
 import RegisterModal from '../components/RegisterModal';
@@ -26,6 +27,15 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // منع السكرول عند فتح منيو الموبايل
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isMobileMenuOpen]);
 
   const toggleLanguage = () => {
     setLang((prev) => (prev === 'en' ? 'ar' : 'en'));
@@ -59,15 +69,10 @@ const Navbar = () => {
               {t.about}
               <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
             </Link>
-            {/* روابط الهوية (Sections) نتركها <a> لأنها Scroll داخلي */}
-            <a href="#launches" className="hover:text-white transition-all duration-300 relative group">
+            <Link to="/services-edara" className="hover:text-white transition-all duration-300 relative group">
               {t.launches}
               <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
-            </a>
-            <a href="#communities" className="hover:text-white transition-all duration-300 relative group">
-              {t.communities}
-              <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-white transition-all duration-300 group-hover:w-full"></span>
-            </a>
+            </Link>
           </div>
 
           {/* --- الأدوات والزر --- */}
@@ -102,37 +107,104 @@ const Navbar = () => {
             </button>
 
             {/* الهامبرغر موبايل */}
-            <button className="lg:hidden text-white" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
+            <button className="lg:hidden text-white z-[110]" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
               {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
 
-        {/* --- منيو الموبايل --- */}
-        <div className={`lg:hidden absolute top-full left-0 w-full bg-black/98 backdrop-blur-lg transition-all duration-500 overflow-hidden ${isMobileMenuOpen ? 'max-h-screen border-t border-white/10 py-10 shadow-2xl' : 'max-h-0'}`}>
-          <div className="flex flex-col items-center gap-8 text-white uppercase text-[12px] tracking-[0.3em] font-bold">
-            <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>{t.home}</Link>
-            <Link to="/about-edara" onClick={() => setIsMobileMenuOpen(false)}>{t.about}</Link>
-            <a href="#launches" onClick={() => setIsMobileMenuOpen(false)}>{t.launches}</a>
-            <a href="#communities" onClick={() => setIsMobileMenuOpen(false)}>{t.communities}</a>
-            
-            <button 
-               onClick={() => { setIsModalOpen(true); setIsMobileMenuOpen(false); }}
-               className="bg-white text-black px-10 py-3 text-[10px] tracking-[0.2em] font-black uppercase hover:bg-gray-200 transition-all"
+        {/* --- منيو الموبايل (Full Screen Overlay) --- */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div 
+              initial={{ x: '100%' }}
+              animate={{ x: 0 }}
+              exit={{ x: '100%' }}
+              transition={{ type: 'tween', duration: 0.5, ease: 'circOut' }}
+              className="lg:hidden fixed inset-0 z-[90] w-full h-screen bg-[#050505] flex flex-col items-center justify-center"
             >
-               {t.register}
-            </button>
+              {/* صورة خلفية فنية خافتة */}
+              <div className="absolute inset-0 opacity-10 pointer-events-none">
+                <img 
+                  src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070" 
+                  className="w-full h-full object-cover grayscale"
+                  alt="bg"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-black via-transparent to-black"></div>
+              </div>
 
-            <div className="flex gap-10 pt-8 border-t border-white/10 w-full justify-center items-center">
-              <a href="tel:+971XXXXXXXX"><Phone size={22} className="text-white/70" /></a>
-              <a href="https://wa.me/971XXXXXXXX" target="_blank" rel="noreferrer"><MessageCircle size={22} className="text-white/70" /></a>
-              <button onClick={toggleLanguage} className="text-[10px] border border-white/20 px-4 py-1.5 rounded-full uppercase tracking-widest">{t.langName}</button>
-            </div>
-          </div>
-        </div>
+              <div className="relative z-10 flex flex-col items-center gap-8 w-full px-10">
+                {[
+                  { name: t.home, path: "/" },
+                  { name: t.about, path: "/about-edara" },
+                  { name: t.launches, path: "/services-edara" },
+                  // { name: t.communities, path: "#communities" }
+                ].map((link, i) => (
+                  <motion.div
+                    key={i}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.2 + i * 0.1 }}
+                  >
+                    <Link 
+                      to={link.path} 
+                      onClick={() => setIsMobileMenuOpen(false)}
+                      className="text-white text-4xl font-black uppercase tracking-tighter hover:text-yellow-600 transition-colors"
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.div>
+                ))}
+
+                <motion.button 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.6 }}
+                  onClick={() => { setIsModalOpen(true); setIsMobileMenuOpen(false); }}
+                  className="mt-8 w-full max-w-[300px] bg-white text-black py-5 text-[11px] font-black uppercase tracking-[0.3em] rounded-sm"
+                >
+                  {t.register}
+                </motion.button>
+
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.8 }}
+                  className="flex gap-8 mt-10"
+                >
+                  <a href="tel:+971XXXXXXXX" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/60"><Phone size={20} /></a>
+                  <button onClick={toggleLanguage} className="text-[10px] font-bold border border-yellow-600/40 text-yellow-600 px-8 py-2 rounded-full uppercase tracking-widest">{t.langName}</button>
+                  <a href="https://wa.me/971XXXXXXXX" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/60"><MessageCircle size={20} /></a>
+                </motion.div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </nav>
 
-      {/* المودال */}
+      {/* --- زر "سجل اهتمامك" العائم للموبايل فقط (يظهر عند النزول) --- */}
+      <AnimatePresence>
+        {isScrolled && !isMobileMenuOpen && (
+          <motion.div 
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            className="sm:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[99] w-[90%] max-w-[350px]"
+          >
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="relative w-full bg-white py-4 rounded-full shadow-2xl flex items-center justify-center gap-3 overflow-hidden"
+            >
+              <span className="absolute inset-0 bg-yellow-600/10 animate-pulse"></span>
+              <span className="relative z-10 text-black text-[11px] font-black uppercase tracking-[0.2em]">
+                {t.register}
+              </span>
+              <Send size={14} className="text-black relative z-10" />
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <RegisterModal 
         isOpen={isModalOpen} 
         onClose={() => setIsModalOpen(false)} 

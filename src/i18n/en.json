@@ -2,7 +2,7 @@
   "company": "EDARA",
   "cuntrue" : "Dubai",
   "about": "About Us",
-  "home": "Home",
+  "home": "Home Page",
   "launches": "Latest Launches",
   "communities": "Communities",
   "callUs": "Call Us",
@@ -18,7 +18,7 @@
   "mail": "Mail",
 
   
-  "launches": "Latest Launches",
+  "launches": "Servers",
   "communities": "Our Communities",
   "standaloneVillas": "Standalone Villas",
   "apartments": "Apartments",
@@ -102,11 +102,71 @@
   "ajmanPoint2Desc": "Connecting Ajman's heritage with modern luxury living.",
 
 
-  "lifestyleTag": "THE EXPERIENCE",
-  "lifestyleTitle": "Beyond Four Walls",
-  "lifestyleDesc": "We curate environments that redefine luxury, where every detail is a testament to our commitment to excellence.",
-  "service1": "Private Concierge",
-  "service2": "Modern Architecture",
-  "service3": "Exclusive Locations",
-  "service4": "Sustainable Living"
+
+  "serverTag": "DIGITAL INFRASTRUCTURE",
+  "serverTitle": "High-Speed Servers For Property Management",
+  "serverStatus": "SYSTEM STATUS: ONLINE",
+  "serverMotto": "Global security, local speed in Ajman.",
+  "secureTitle": "Investment Data Protection",
+  "secureDesc": "We use advanced encryption protocols to ensure the privacy of our owners and investors.",
+  "speedTitle": "Lag-Free Performance",
+  "speedDesc": "Experience 4K virtual tours and ultra-fast browsing of all our projects via local data centers.",
+  "serverContact": "EXPLORE TECH SOLUTIONS",
+
+  "serverTag": "ADVANCED INFRASTRUCTURE",
+  "serverTitle": "A NEW ERA OF PROPERTY SECURITY",
+  "serverDescMain": "We don't just build properties; we build the digital ecosystems that protect your investments with global tech standards.",
+  "uptime": "SYSTEM UPTIME",
+  "encryption": "DATA ENCRYPTION",
+  "serverStatus": "SERVER STATUS: ACTIVE",
+
+  "ultraTag": "NEXT-GEN CLOUD",
+  "ultraTitle": "BEYOND SERVERS",
+  "ultraDesc": "Our real estate ecosystem is powered by a digital neural network, ensuring data delivery in microseconds.",
+  "ultraFeatureTitle1": "Predictive AI",
+  "ultraFeatureDesc1": "Algorithms predicting Ajman market trends based on real-time data analysis.",
+  "ultraFeatureTitle2": "Quantum Security",
+  "ultraFeatureDesc2": "Unbreakable encryption protecting your property deeds and contracts forever.",
+  "ultraFeatureTitle3": "Global Sync",
+  "ultraFeatureDesc3": "Your data is accessible worldwide with zero latency, as if you were in the office.",
+
+  "estateTag": "A NEW LEVEL OF LUXURY",
+  "estateTitleLine1": "AJMAN REAL ESTATE",
+  "estateTitleLine2": "GLOBAL STANDARDS",
+  "estateDescription": "We bring Dubai's architectural excellence to the heart of Ajman, offering projects that rival the luxury of giants like Emaar and Binghatti.",
+  "towerName": "Pearl Tech Tower",
+  "locationAjman": "AJMAN - UAE",
+  "statLabel1": "PRICES STARTING",
+  "statLabel2": "INVESTMENT ROI",
+  "discoverMore": "DISCOVER PROJECT",
+
+  "heroTag": "A LEGACY OF LUXURY IN AJMAN",
+  "heroTitleLine1": "CRAFTING",
+  "heroTitleLine2": "THE FUTURE",
+  "heroDesc": "Exceptional real estate projects blending architectural elegance with state-of-the-art smart technology.",
+  "discoverBtn": "EXPLORE PROJECTS",
+  "contactBtn": "TALK TO EXPERT",
+
+
+
+  "philosophyTag": "The Vision",
+  "philosophyTitle": "Crafting Modern Landscapes",
+  "philosophyDesc": "In the heart of Ajman, we don't just build structures; we sculpt experiences. Every line, every curve, and every shadow is designed to redefine luxury for a global audience.",
+  "stat1Num": "120+",
+  "stat1Label": "Luxury Units",
+  "stat2Num": "05",
+  "stat2Label": "Global Awards",
+  "stat3Num": "100%",
+  "stat3Label": "Prime Satisfaction",
+
+
+  "aboutTag": "The Essence",
+  "aboutTitle": "Beyond Concrete & Steel",
+  "aboutDesc": "We are a collective of dreamers, architects, and strategists. At our core, we believe that Ajman is a canvas, and our mission is to paint its future with bold strokes of innovation.",
+  "teamTitle": "The Visionaries",
+  "teamDesc": "Led by industry pioneers with over 20 years of excellence in global real estate.",
+  "values1": "Bold Innovation",
+  "values2": "Uncompromising Quality",
+  "values3": "Global Standards"
+ 
 }
