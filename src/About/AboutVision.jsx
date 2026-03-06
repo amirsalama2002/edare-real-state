@@ -45,7 +45,7 @@ const AboutVision = ({ t, isRtl }) => {
                 {isRtl ? "رئيس مجلس الإدارة" : "Chairman & Founder"}
               </p>
               <h4 className="text-2xl font-serif tracking-tight leading-none">
-                {isRtl ? "سعادة / خليفة الهاشمي" : "H.E. Khalifa Al Hashemi"}
+                {isRtl ? "سعادة / منذر " : "H.E. Monzer"}
               </h4>
             </motion.div>
           </div>
