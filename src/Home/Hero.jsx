@@ -3,16 +3,13 @@ import { MessageCircle, Phone, Mail, FileText, ChevronDown } from 'lucide-react'
 import { motion } from 'framer-motion';
 import en from '../i18n/en.json';
 import ar from '../i18n/ar.json';
-// استيراد المودال (تأكد من صحة المسار لديك)
 import RegisterModal from '../components/RegisterModal'; 
 
 const Hero = () => {
   const [lang, setLang] = useState(localStorage.getItem('appLang') || 'en');
-  // حالة التحكم في فتح وإغلاق المودال
   const [isModalOpen, setIsModalOpen] = useState(false);
   const videoRef = useRef(null);
 
-  // البيانات الخاصة بك
   const contactInfo = {
     phone: "971503214077",
     email: "hamirsalama@gmail.com",
@@ -23,10 +20,17 @@ const Hero = () => {
     const handleStorageChange = () => setLang(localStorage.getItem('appLang') || 'en');
     window.addEventListener('storage', handleStorageChange);
     
+    // محاولة تشغيل الفيديو برمجياً عند تحميل المكون
     if (videoRef.current) {
-      videoRef.current.play().catch(error => {
-        console.log("Autoplay prevented, trying again...", error);
-      });
+      const playVideo = () => {
+        videoRef.current.play().catch(error => {
+          console.log("Autoplay blocked, waiting for interaction", error);
+        });
+      };
+      
+      playVideo();
+      // محاولة ثانية بعد وقت قصير لضمان استجابة المتصفح
+      setTimeout(playVideo, 1000);
     }
 
     const interval = setInterval(handleStorageChange, 500);
@@ -43,16 +47,19 @@ const Hero = () => {
   return (
     <div className="relative h-[100svh] w-full overflow-hidden bg-black font-sans" dir={isRtl ? 'rtl' : 'ltr'}>
       
-      {/* خلفية الفيديو */}
+      {/* خلفية الفيديو - التعديلات هنا */}
       <div className="absolute inset-0 z-0">
         <video
           ref={videoRef}
           autoPlay
           loop
           muted
-          playsInline
-          disablePictureInPicture
+          controls={false}
+          playsInline // أساسي للعمل على iOS/Android داخل المتصفح
+          webkit-playsinline="true" // دعم إضافي لمتصفحات Safari القديمة
+          preload="auto"
           className="w-full h-full object-cover opacity-60 scale-105"
+          style={{ pointerEvents: 'none' }} // لمنع ظهور أدوات التحكم عند اللمس
         >
           <source src={videoUrl} type="video/mp4" />
         </video>
@@ -90,7 +97,6 @@ const Hero = () => {
             {t.exploreBtn}
           </button>
           
-          {/* زر التواصل - تم إضافة onClick لفتح المودال */}
           <button 
             onClick={() => setIsModalOpen(true)}
             className="w-full sm:w-auto border border-white/20 backdrop-blur-md px-10 py-4 md:py-5 uppercase tracking-[0.2em] text-[9px] font-black text-white transition-all duration-500 active:scale-95"
@@ -104,52 +110,17 @@ const Hero = () => {
       <div className={`fixed bottom-6 md:top-1/2 md:-translate-y-1/2 z-50 flex md:flex-col gap-3 px-6 md:px-0 w-full md:w-auto justify-center
         ${isRtl ? 'md:left-8' : 'md:right-8'}`}>
         
-        <FloatingButton 
-          icon={<Phone size={20} />} 
-          label={t.callUs} 
-          href={`tel:+${contactInfo.phone}`} 
-          color="bg-white/10" 
-          hoverBg="hover:bg-blue-600" 
-          isRtl={isRtl} 
-        />
-        
-        <FloatingButton 
-          icon={<MessageCircle size={22} />} 
-          label={t.whatsapp} 
-          href={`https://wa.me/${contactInfo.whatsapp}`} 
-          color="bg-white/10" 
-          hoverBg="hover:bg-green-600" 
-          isRtl={isRtl} 
-        />
-
-        <FloatingButton 
-          icon={<Mail size={20} />} 
-          label="Email Us" 
-          href={`mailto:${contactInfo.email}`} 
-          color="bg-white/10" 
-          hoverBg="hover:bg-red-600" 
-          isRtl={isRtl} 
-        />
+        <FloatingButton icon={<Phone size={20} />} label={t.callUs} href={`tel:+${contactInfo.phone}`} color="bg-white/10" hoverBg="hover:bg-blue-600" isRtl={isRtl} />
+        <FloatingButton icon={<MessageCircle size={22} />} label={t.whatsapp} href={`https://wa.me/${contactInfo.whatsapp}`} color="bg-white/10" hoverBg="hover:bg-green-600" isRtl={isRtl} />
+        <FloatingButton icon={<Mail size={20} />} label="Email Us" href={`mailto:${contactInfo.email}`} color="bg-white/10" hoverBg="hover:bg-red-600" isRtl={isRtl} />
 
         <div className="hidden sm:flex">
-          <FloatingButton 
-            icon={<FileText size={20} />} 
-            label={t.brochure} 
-            href="#" 
-            color="bg-white/10" 
-            hoverBg="hover:bg-white hover:text-black" 
-            isRtl={isRtl} 
-          />
+          <FloatingButton icon={<FileText size={20} />} label={t.brochure} href="#" color="bg-white/10" hoverBg="hover:bg-white hover:text-black" isRtl={isRtl} />
         </div>
       </div>
 
-      {/* استدعاء مكون المودال */}
-      <RegisterModal 
-        isOpen={isModalOpen} 
-        onClose={() => setIsModalOpen(false)} 
-      />
+      <RegisterModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
-      {/* مؤشر النزول */}
       <div className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 opacity-50">
         <motion.div animate={{ y: [0, 10, 0] }} transition={{ repeat: Infinity, duration: 2 }}>
           <ChevronDown size={20} className="text-white" />
