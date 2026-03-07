@@ -191,7 +191,7 @@ const Navbar = () => {
             exit={{ y: 100, opacity: 0 }}
             className="sm:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[99] w-[90%] max-w-[350px]"
           >
-            <button
+            {/* <button
               onClick={() => setIsModalOpen(true)}
               className="relative w-full bg-white py-4 rounded-full shadow-2xl flex items-center justify-center gap-3 overflow-hidden"
             >
@@ -200,7 +200,7 @@ const Navbar = () => {
                 {t.register}
               </span>
               <Send size={14} className="text-black relative z-10" />
-            </button>
+            </button> */}
           </motion.div>
         )}
       </AnimatePresence>
