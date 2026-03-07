@@ -84,22 +84,35 @@ const Footer = () => {
               ))}
             </div>
           </div>
-
-          <div>
-            <h4 className="text-[10px] tracking-[0.4em] uppercase text-gray-400 mb-8 font-black">
-              {isRtl ? "اكتشف" : "Discover"}
-            </h4>
-            <ul className="space-y-4">
-              {[t.home, t.launches, t.communities, t.about].map((item, i) => (
-                <li key={i}>
-                  <a href="#" className="text-gray-400 hover:text-white text-sm transition-all flex items-center gap-2 group">
-                    <span className="h-[1px] w-0 bg-white group-hover:w-4 transition-all"></span>
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+            {/* jjj */}
+       <div>
+  <h4 className="text-[10px] tracking-[0.4em] uppercase text-gray-400 mb-8 font-black">
+    {isRtl ? "اكتشف" : "Discover"}
+  </h4>
+  <ul className="space-y-4">
+    {[
+      { name: t.home, id: '/' },
+      { name: isRtl ? "من نحن" : "About Us", id: 'about-edara' },
+      { name: isRtl ? "خدماتنا" : "Services", id: 'services-edara' },
+    ].map((item, i) => (
+      <li key={i}>
+        <a 
+          href={item.id === '/' ? '/' : `${item.id}`} 
+          className={`text-gray-400 hover:text-white text-sm transition-all duration-300 flex items-center gap-2 group ${
+            isRtl ? 'hover:pr-2' : 'hover:pl-2'
+          }`}
+        >
+          {/* الخط الجانبي الذكي الذي يتمدد عند الحوم */}
+          <span className="h-[1px] w-0 bg-white group-hover:w-4 transition-all duration-500 ease-out shrink-0"></span>
+          
+          <span className="tracking-wide uppercase text-[12px]">
+            {item.name}
+          </span>
+        </a>
+      </li>
+    ))}
+  </ul>
+</div>
 
           <div>
             <h4 className="text-[10px] tracking-[0.4em] uppercase text-gray-400 mb-8 font-black">
@@ -108,11 +121,11 @@ const Footer = () => {
             <ul className="space-y-6">
               <li className="flex items-center gap-4 text-gray-400 text-sm italic">
                 <MapPin size={16} className="text-white" />
-                {isRtl ? "دبي، وسط المدينة، برج إعمار" : "Dubai, Downtown, Emaar Square"}
+                {isRtl ? "عجمان، الإمارات العربية المتحدة" : "Ajman, United Arab Emirates"}
               </li>
               <li className="flex items-center gap-4 text-gray-400 text-sm">
                 <Phone size={16} className="text-white" />
-                +971 4 123 4567
+                +971 50 321 4077
               </li>
               <li className="flex items-center gap-4 text-gray-400 text-sm">
                 <Mail size={16} className="text-white" />
