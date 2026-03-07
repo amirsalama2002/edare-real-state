@@ -16,6 +16,8 @@ const Navbar = () => {
   const t = lang === 'en' ? en : ar;
   const isRtl = lang === 'ar';
 
+  const phoneNumber = "971503214077"; // الرقم الخاص بك
+
   useEffect(() => {
     localStorage.setItem('appLang', lang);
     document.documentElement.dir = isRtl ? 'rtl' : 'ltr';
@@ -28,7 +30,6 @@ const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  // منع السكرول عند فتح منيو الموبايل
   useEffect(() => {
     if (isMobileMenuOpen) {
       document.body.style.overflow = 'hidden';
@@ -86,16 +87,17 @@ const Navbar = () => {
               </button>
 
               <div className={`flex items-center gap-8 border-white/20 ${isRtl ? 'border-r pr-8' : 'border-l pl-8'}`}>
-                <a href="tel:+971XXXXXXXX" className="hover:opacity-60 transition-opacity flex items-center gap-2">
+                {/* رابط الاتصال ديسكتوب */}
+                <a href={`tel:+${phoneNumber}`} className="hover:text-yellow-600 transition-colors flex items-center gap-2">
                   <Phone size={14} /> {t.callUs}
                 </a>
-                <a href="https://wa.me/971XXXXXXXX" target="_blank" rel="noreferrer" className="hover:opacity-60 transition-opacity flex items-center gap-2">
+                {/* رابط واتساب ديسكتوب */}
+                <a href={`https://wa.me/${phoneNumber}`} target="_blank" rel="noreferrer" className="hover:text-green-500 transition-colors flex items-center gap-2">
                   <MessageCircle size={14} /> {t.whatsapp}
                 </a>
               </div>
             </div>
 
-            {/* زر المودال (Desktop) */}
             <button 
               onClick={() => setIsModalOpen(true)}
               className="hidden sm:block relative overflow-hidden group border border-white/40 px-8 py-3 text-[10px] font-bold uppercase tracking-widest text-white transition-all duration-500 hover:border-white"
@@ -106,14 +108,13 @@ const Navbar = () => {
               <span className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-out"></span>
             </button>
 
-            {/* الهامبرغر موبايل */}
             <button className="lg:hidden text-white z-[110]" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
               {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
           </div>
         </div>
 
-        {/* --- منيو الموبايل (Full Screen Overlay) --- */}
+        {/* --- منيو الموبايل --- */}
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div 
@@ -123,7 +124,6 @@ const Navbar = () => {
               transition={{ type: 'tween', duration: 0.5, ease: 'circOut' }}
               className="lg:hidden fixed inset-0 z-[90] w-full h-screen bg-[#050505] flex flex-col items-center justify-center"
             >
-              {/* صورة خلفية فنية خافتة */}
               <div className="absolute inset-0 opacity-10 pointer-events-none">
                 <img 
                   src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070" 
@@ -138,7 +138,6 @@ const Navbar = () => {
                   { name: t.home, path: "/" },
                   { name: t.about, path: "/about-edara" },
                   { name: t.launches, path: "/services-edara" },
-                  // { name: t.communities, path: "#communities" }
                 ].map((link, i) => (
                   <motion.div
                     key={i}
@@ -161,7 +160,7 @@ const Navbar = () => {
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.6 }}
                   onClick={() => { setIsModalOpen(true); setIsMobileMenuOpen(false); }}
-                  className="mt-8 w-full max-w-[300px] bg-white text-black py-5 text-[11px] font-black uppercase tracking-[0.3em] rounded-sm"
+                  className="mt-8 w-full max-w-[300px] bg-white text-black py-5 text-[11px] font-black uppercase tracking-[0.3em] rounded-sm shadow-xl"
                 >
                   {t.register}
                 </motion.button>
@@ -172,38 +171,24 @@ const Navbar = () => {
                   transition={{ delay: 0.8 }}
                   className="flex gap-8 mt-10"
                 >
-                  <a href="tel:+971XXXXXXXX" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/60"><Phone size={20} /></a>
-                  <button onClick={toggleLanguage} className="text-[10px] font-bold border border-yellow-600/40 text-yellow-600 px-8 py-2 rounded-full uppercase tracking-widest">{t.langName}</button>
-                  <a href="https://wa.me/971XXXXXXXX" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-white/60"><MessageCircle size={20} /></a>
+                  {/* أزرار الاتصال والواتساب موبايل */}
+                  <a href={`tel:+${phoneNumber}`} className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center text-white bg-white/5 active:bg-yellow-600 active:text-black transition-all">
+                    <Phone size={24} />
+                  </a>
+                  
+                  <button onClick={toggleLanguage} className="text-[10px] font-bold border border-yellow-600/40 text-yellow-600 px-8 py-2 rounded-full uppercase tracking-widest bg-yellow-600/5">
+                    {t.langName}
+                  </button>
+
+                  <a href={`https://wa.me/${phoneNumber}`} target="_blank" rel="noreferrer" className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center text-white bg-white/5 active:bg-green-600 transition-all">
+                    <MessageCircle size={24} />
+                  </a>
                 </motion.div>
               </div>
             </motion.div>
           )}
         </AnimatePresence>
       </nav>
-
-      {/* --- زر "سجل اهتمامك" العائم للموبايل فقط (يظهر عند النزول) --- */}
-      <AnimatePresence>
-        {isScrolled && !isMobileMenuOpen && (
-          <motion.div 
-            initial={{ y: 100, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            exit={{ y: 100, opacity: 0 }}
-            className="sm:hidden fixed bottom-6 left-1/2 -translate-x-1/2 z-[99] w-[90%] max-w-[350px]"
-          >
-            {/* <button
-              onClick={() => setIsModalOpen(true)}
-              className="relative w-full bg-white py-4 rounded-full shadow-2xl flex items-center justify-center gap-3 overflow-hidden"
-            >
-              <span className="absolute inset-0 bg-yellow-600/10 animate-pulse"></span>
-              <span className="relative z-10 text-black text-[11px] font-black uppercase tracking-[0.2em]">
-                {t.register}
-              </span>
-              <Send size={14} className="text-black relative z-10" />
-            </button> */}
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       <RegisterModal 
         isOpen={isModalOpen} 
