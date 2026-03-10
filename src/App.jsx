@@ -7,6 +7,7 @@ import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import ScrollToTop from './components/ScrollToTop';
 import ScrollToTopButton from "./components/ScrollToTopButton";
+import AjmanProperties from "./components/AjmanProperties";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/properties/ajman" element={<AjmanProperties/>} />
         <Route path="/about-edara/" element={<About />} />
         <Route path="/services-edara" element={<Services />} />
         <Route path="/contact" element={<Contact />} />

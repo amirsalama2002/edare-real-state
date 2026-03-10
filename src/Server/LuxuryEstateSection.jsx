@@ -65,7 +65,7 @@ const LuxuryEstateSection = () => {
           <div className="lg:col-span-7">
             <motion.div style={{ scale, opacity }} className="relative group overflow-hidden rounded-tr-[100px] border-l-4 border-yellow-600">
               <img 
-                src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260" 
+                src="https://gjproperties.ae/wp-content/uploads/2024/02/h5.png" 
                 alt="Ajman Luxury Tower"
                 className="w-full h-[600px] object-cover transition-transform duration-1000 group-hover:scale-110"
               />
