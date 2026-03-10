@@ -98,26 +98,38 @@ const Footer = () => {
             </ul>
           </div>
 
+
           {/* التواصل */}
-          <div>
-            <h4 className="text-[10px] tracking-[0.4em] uppercase text-gray-400 mb-8 font-black">
-              {isRtl ? "اتصل بنا" : "Contact"}
-            </h4>
-            <ul className="space-y-6">
-              <li className="flex items-center gap-4 text-gray-400 text-sm italic">
-                <MapPin size={16} className="text-white" />
-                {isRtl ? "عجمان، الإمارات العربية المتحدة" : "Ajman, United Arab Emirates"}
-              </li>
-              <li className={`flex items-center gap-4 text-gray-400 text-sm ${isRtl ? 'flex-row-reverse' : ''}`}>
-                <Phone size={16} className="text-white" />
-                <span dir="ltr">+971 50 321 4077</span>
-              </li>
-              <li className="flex items-center gap-4 text-gray-400 text-sm">
-                <Mail size={16} className="text-white" />
-                info@edara.com
-              </li>
-            </ul>
-          </div>
+<div>
+  <h4 className="text-[10px] tracking-[0.4em] uppercase text-gray-400 mb-8 font-black">
+    {isRtl ? "اتصل بنا" : "Contact"}
+  </h4>
+  <ul className="space-y-6">
+    <li className="flex items-center gap-4 text-gray-400 text-sm italic">
+      <MapPin size={16} className="text-white shrink-0" />
+      {isRtl ? "عجمان، الإمارات العربية المتحدة" : "Ajman, United Arab Emirates"}
+    </li>
+    
+    {/* التعديل هنا: استخدام flex-row دائماً لضمان بقاء الأيقونة على اليسار والارقام بجانبها بشكل صحيح */}
+    <li className="flex items-center gap-4 text-gray-400 text-sm" style={{ flexDirection: 'row' }}>
+      <Phone size={16} className="text-white shrink-0" />
+      <a 
+        href="tel:+971503214077" 
+        dir="ltr" 
+        className="hover:text-white transition-colors tracking-widest"
+      >
+        +971 50 321 4077
+      </a>
+    </li>
+
+    <li className="flex items-center gap-4 text-gray-400 text-sm">
+      <Mail size={16} className="text-white shrink-0" />
+      <a href="mailto:info@edara.com" className="hover:text-white transition-colors">
+        info@edara.com
+      </a>
+    </li>
+  </ul>
+</div>
 
           {/* النشرة الإخبارية */}
           <div>
