@@ -2,6 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { motion, useSpring } from 'framer-motion';
 import en from '../i18n/en.json';
 import ar from '../i18n/ar.json';
+// import { Link } from 'react-scroll';
+import { Link } from 'react-router-dom';
+// import { motion } from 'framer-motion';
+
 
 const UltraModernSection = () => {
   const [lang, setLang] = useState(localStorage.getItem('appLang') || 'en');
@@ -100,18 +104,26 @@ const UltraModernSection = () => {
               </div>
 
               {/* الزر - تم تغييره للنمط الذهبي/الأسود الفخم */}
-              <motion.button 
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative flex items-center justify-center px-10 py-5 bg-white text-black rounded-full overflow-hidden transition-all duration-500 shadow-[0_20px_40px_rgba(0,0,0,0.3)]"
-              >
-                <span className="relative z-10 text-[10px] tracking-[0.4em] uppercase font-black transition-colors duration-500 group-hover:text-white">
-                    {t.ultraDiscoverBtn}
-                </span>
-                <motion.div 
-                  className="absolute inset-0 bg-yellow-600 translate-y-full group-hover:translate-y-0 transition-transform duration-500 ease-in-out"
-                />
-              </motion.button>
+              <Link to="/discover-Luxury-edara" className="inline-block">
+  <motion.div 
+    whileHover={{ scale: 1.02 }}
+    whileTap={{ scale: 0.98 }}
+    className="group relative flex items-center justify-center px-12 py-6 bg-white text-black overflow-hidden transition-all duration-500 shadow-[0_20px_40px_rgba(0,0,0,0.4)] border border-white/10 cursor-pointer"
+  >
+    {/* النص: تباعد حروف واسع (0.5em) ليعطي المظهر العالمي */}
+    <span className="relative z-10 text-[11px] tracking-[0.5em] uppercase font-black transition-colors duration-700 group-hover:text-white">
+        {t.ultraDiscoverBtn}
+    </span>
+
+    {/* الخلفية الذهبية التي تصعد بنعومة (Ease-out) */}
+    <motion.div 
+      className="absolute inset-0 bg-[#A88948] translate-y-full group-hover:translate-y-0 transition-transform duration-700 ease-[0.19, 1, 0.22, 1]"
+    />
+
+    {/* تأثير اللمعان (Shine Effect) عند مرور الماوس */}
+    <div className="absolute inset-0 opacity-0 group-hover:opacity-30 transition-opacity duration-700 bg-gradient-to-r from-transparent via-white to-transparent -translate-x-full group-hover:translate-x-full transform skew-x-12" />
+  </motion.div>
+</Link>
             </motion.div>
           </div>
 

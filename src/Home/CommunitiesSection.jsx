@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import { Link } from 'react-router-dom'; // 1. استيراد Link
 import en from '../i18n/en.json';
 import ar from '../i18n/ar.json';
+
+// 2. دمج motion مع Link لإنشاء مكون متحرك قابل للتنقل
+const MotionLink = motion(Link);
 
 const communities = [
   { id: 1, nameKey: 'Marassi', locationKey: 'NorthCoast', image: 'https://images.pexels.com/photos/1838640/pexels-photo-1838640.jpeg?auto=compress&cs=tinysrgb&w=1260', size: 'large' },
@@ -39,12 +43,16 @@ const CommunitiesSection = () => {
             {t.exploreDesc}
           </p>
         </div>
-        <motion.button 
+
+        {/* 3. استخدام MotionLink بدلاً من motion.button */}
+        <MotionLink 
+          to="/communities" // المسار الذي سيوجه إليه
           whileHover={{ scale: 1.05 }}
-          className="border border-white/20 px-8 py-4 text-[10px] tracking-[0.3em] uppercase text-white hover:bg-white hover:text-black transition-all duration-500"
+          whileTap={{ scale: 0.95 }}
+          className="border border-white/20 px-8 py-4 text-[10px] tracking-[0.3em] uppercase text-white hover:bg-white hover:text-black transition-all duration-500 inline-block text-center"
         >
           {t.communities}
-        </motion.button>
+        </MotionLink>
       </div>
 
       {/* Grid Container */}

@@ -183,6 +183,19 @@
   "prop_title_5": "Heritage Ajman Villa",
   "prop_loc_5": "Al Mowaihat, Ajman",
   "prop_title_6": "Skyline Executive Suite",
-  "prop_loc_6": "City Center, Ajman"
+  "prop_loc_6": "City Center, Ajman",
+
+
+  "exploreTitle": "Discover Ajman's Prime Living",
+  "exploreDesc": "Exquisite properties crafted for those who seek more than just a home, but a legacy.",
+  "view_all": "View All Collections",
+  "AlZorah": "Al Zorah City",
+  "AjmanCorniche": "Ajman Corniche",
+  "AlRawda": "Al Rawda District",
+  "AjmanHills": "Ajman Hills",
+  "AjmanCity": "Coastal Ajman",
+  "SeaFront": "Waterfront",
+  "Residential": "Premium Living",
+  "LuxuryDistrict": "Elite District"
  
 }

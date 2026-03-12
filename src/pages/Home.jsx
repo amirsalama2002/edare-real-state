@@ -8,6 +8,7 @@ import UltraModernSection from "../Home/UltraModernSection";
 
 
 
+
 export default function Home() {
   return (
     <div>
@@ -26,6 +27,7 @@ export default function Home() {
       {/* Section 7 */}
        <UltraModernSection/>
 
+    
 
 
     </div>

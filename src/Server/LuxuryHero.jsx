@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import en from '../i18n/en.json';
 import ar from '../i18n/ar.json';
 import RegisterModal from '../components/RegisterModal'; 
+import { Link } from 'react-router-dom';
 
 const LuxuryHero = () => {
   const [lang, setLang] = useState(localStorage.getItem('appLang') || 'en');
@@ -95,10 +96,21 @@ const LuxuryHero = () => {
               </p>
 
               <div className="flex gap-4">
-                <button className="relative group px-8 py-4 bg-white text-black text-[10px] font-black uppercase tracking-widest overflow-hidden transition-all duration-500">
-                  <span className="relative z-10 group-hover:text-white transition-colors duration-500">{t.discoverBtn}</span>
-                  <div className="absolute inset-0 bg-yellow-600 -translate-x-full group-hover:translate-x-0 transition-transform duration-500"></div>
-                </button>
+                <Link 
+  to="/properties/ajman" 
+  className="relative group px-8 py-4 bg-white text-black text-[10px] font-black uppercase tracking-widest overflow-hidden transition-all duration-500 inline-block text-center"
+>
+  {/* النص - يتحول للأبيض عند الهوفر */}
+  <span className="relative z-10 group-hover:text-white transition-colors duration-500">
+    {t.discoverBtn}
+  </span>
+
+  {/* الخلفية الذهبية - تنزلق من اليسار (X-axis) */}
+  <div className="absolute inset-0 bg-[#a16207] -translate-x-full group-hover:translate-x-0 transition-transform duration-500 ease-in-out"></div>
+  
+  {/* لمسة إضافية: خط سفلي رفيع يظهر مع الحركة */}
+  <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-white/20 group-hover:w-full transition-all duration-700 delay-100"></div>
+</Link>
                 
                 <button 
                   onClick={() => setIsModalOpen(true)}
