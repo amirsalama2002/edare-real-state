@@ -26,7 +26,8 @@ const GlobalDiscoverSection = () => {
   const getText = (key) => t[key] || key;
 
   return (
-    <section className="bg-[#050505] py-16 md:py-32 px-4 md:px-20 overflow-hidden" dir={isRtl ? 'rtl' : 'ltr'}>
+    /* التعديل هنا: أضفت pt-20 للموبايل و pt-40 للشاشات الكبيرة لنزول السكشن بالكامل */
+    <section className="bg-[#050505] pt-20 md:pt-40 pb-16 md:pb-32 px-4 md:px-20 overflow-hidden" dir={isRtl ? 'rtl' : 'ltr'}>
       
       {/* 1. Header Section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-12 md:mb-24 gap-8 relative z-10">
@@ -49,7 +50,7 @@ const GlobalDiscoverSection = () => {
           </motion.h2>
         </div>
         
-        <motion.button 
+        {/* <motion.button 
           whileTap={{ scale: 0.95 }}
           className="group relative border border-white/20 px-10 py-5 rounded-full md:rounded-none overflow-hidden transition-all duration-500 hover:border-white"
         >
@@ -57,7 +58,7 @@ const GlobalDiscoverSection = () => {
             {getText('view_all')}
           </span>
           <div className="absolute inset-0 bg-white translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
-        </motion.button>
+        </motion.button> */}
       </div>
 
       {/* 2. Professional Bento Grid */}
@@ -73,19 +74,16 @@ const GlobalDiscoverSection = () => {
               ${item.size === 'large' ? 'md:col-span-2 md:row-span-2' : ''}
               ${item.size === 'medium' ? 'md:col-span-2' : ''}`}
           >
-            {/* Optimized Image Hover */}
             <img 
               src={item.image} 
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] ease-out group-hover:scale-110" 
               alt={getText(item.nameKey)}
             />
             
-            {/* Dynamic Overlays */}
             <div className={`absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent transition-opacity duration-700
               ${idx === 0 ? 'opacity-90' : 'opacity-100 group-hover:opacity-70'}`} 
             />
             
-            {/* Play Button Logic: Permanent on first item, hover on others */}
             <div className={`absolute inset-0 flex items-center justify-center transition-all duration-700
               ${idx === 0 
                 ? 'opacity-100 scale-100' 
@@ -94,7 +92,6 @@ const GlobalDiscoverSection = () => {
                <div className={`relative flex items-center justify-center
                  ${idx === 0 ? 'animate-pulse' : ''}`}
                >
-                  {/* Outer Ring for pulse effect */}
                   {idx === 0 && <div className="absolute inset-0 rounded-full bg-[#c5a059]/20 scale-[1.5] animate-ping" />}
                   
                   <div className="w-16 h-16 md:w-24 md:h-24 rounded-full bg-[#c5a059] flex items-center justify-center text-black shadow-[0_0_50px_rgba(197,160,89,0.4)] backdrop-blur-sm relative z-10">
@@ -103,7 +100,6 @@ const GlobalDiscoverSection = () => {
                </div>
             </div>
 
-            {/* Bottom Content Overlay */}
             <div className={`absolute bottom-8 md:bottom-12 ${isRtl ? 'right-8 md:right-12' : 'left-8 md:left-12'} text-white z-20`}>
               <div className="flex items-center gap-3 mb-4 text-[#c5a059]">
                 <MapPin size={16} />
@@ -117,7 +113,6 @@ const GlobalDiscoverSection = () => {
               </h3>
             </div>
 
-            {/* Subtle Inner Glow */}
             <div className="absolute inset-0 border border-white/5 rounded-[32px] md:rounded-[48px] pointer-events-none group-hover:border-white/10 transition-colors" />
           </motion.div>
         ))}
