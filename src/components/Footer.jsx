@@ -62,12 +62,26 @@ const Footer = () => {
                 : "Leaders in creating residential communities that exceed expectations, where luxury meets modern design."}
             </p>
             <div className="flex gap-4 mt-8">
-              {[Facebook, Instagram, Twitter, Linkedin].map((Icon, idx) => (
-                <a key={idx} href="#" className="text-gray-500 hover:text-white transition-colors">
-                  <Icon size={18} />
-                </a>
-              ))}
-            </div>
+  <a href="https://www.facebook.com/profile.php?id=100048830977348" target="_blank" rel="noopener noreferrer">
+    <Facebook size={18} className="text-gray-500 hover:text-white transition-colors" />
+  </a>
+
+  <a href="https://www.instagram.com/amir_salama_hassan?igsh=enNyNGR5a3llenU1" target="_blank" rel="noopener noreferrer">
+    <Instagram size={18} className="text-gray-500 hover:text-white transition-colors" />
+  </a>
+
+  <a href="https://x.com/amirsalama85567?s=11" target="_blank" rel="noopener noreferrer">
+    <Twitter size={18} className="text-gray-500 hover:text-white transition-colors" />
+  </a>
+
+  <a
+    href="linkedin.com/in/amir-hassan-2b5084324/"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <Linkedin size={18} className="text-gray-500 hover:text-white transition-colors" />
+  </a>
+</div>
           </div>
 
           {/* سكشن الروابط المحدث بـ React Router */}
@@ -124,7 +138,7 @@ const Footer = () => {
 
     <li className="flex items-center gap-4 text-gray-400 text-sm">
       <Mail size={16} className="text-white shrink-0" />
-      <a href="mailto:info@edara.com" className="hover:text-white transition-colors">
+      <a href="mailto:amirsalama.dev@gmail.com" className="hover:text-white transition-colors">
         info@edara.com
       </a>
     </li>
